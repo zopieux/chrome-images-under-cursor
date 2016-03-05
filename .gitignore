@@ -1,0 +1,9 @@
+build/
+src/img/icon-*.png
+.sass-cache/
+*.css
+*.css.map
+*.crx
+*.pem
+*.zip
+package-icon.png

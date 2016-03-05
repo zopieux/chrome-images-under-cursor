@@ -1,0 +1,158 @@
+$pfx: 'imageundercursor-';
+$zindex: 9999999999999; // yes, and I'm not even sure that's enough
+
+.#{$pfx}wrapper {
+	.arrow {
+		$size: 11px;
+		&::after {
+			top: 1px;
+			left: -$size;
+			position: absolute;
+			display: block;
+			content: ' ';
+			border: $size solid transparent;
+			border-top-width: 0;
+			border-bottom-color: white;
+		}
+		display: block;
+		border: $size solid transparent;
+		position: absolute;
+		top: -$size;
+		margin-left: -$size / 2;
+		border-top-width: 0;
+		border-bottom-color: rgba(0, 0, 0, .25);
+	}
+
+	.body {
+		* {
+			font-size: 12px;
+			font-family: helvetica, aria, sans-serif;
+			color: #333;
+		}
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+
+		li:not(:last-child) {
+			border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+		}
+
+		$size: 32px;
+		$padding: 6px;
+
+		li {
+			.img {
+				width: $size;
+				height: $size;
+				position: absolute;
+				background-size: contain;
+				background-repeat: none;
+				vertical-align: middle;
+				display: inline-block;
+				box-sizing: border-box;
+				border: 1px solid #aaa;
+				border-radius: 2px;
+			}
+			.info {
+				font-size: 0.9em;
+				color: #777;
+				line-height: 1;
+				top: 0;
+				display: block;
+			}
+			.link, .info {
+				margin-left: $size + $padding;
+			}
+			.link {
+				text-decoration: none;
+				color: #3b5998 !important;
+			}
+			.link:hover {
+				text-decoration: underline;
+			}
+			box-sizing: border-box;
+			padding: $padding;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			margin: 0;
+			white-space: nowrap;
+			height: $size + 2 * $padding;
+		}
+	}
+
+	text-align: left;
+	background: white;
+	border-radius: 3px;
+	border: 1px solid rgba(0, 0, 0, .25);
+	max-width: 400px;
+	position: absolute;
+	z-index: $zindex;
+	padding: 0;
+	margin: 0;
+}
+
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-3px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(3px, 0, 0);
+  }
+}
+@keyframes fadeInOut {
+	0% {
+		opacity: 0;
+	}
+	20% {
+		opacity: 1;
+	}
+    80% {
+		opacity: 1;
+	}
+    100% {
+		opacity: 0;
+	}
+}
+
+.#{$pfx}wrapper-nope {
+	animation-timing-function: linear;
+	animation-fill-mode: both;
+	animation-duration: .7s;
+
+	&.fade {
+		animation-name: fadeInOut;
+		&::after {
+			animation: shake .7s cubic-bezier(.36,.07,.19,.97) both;
+			transform: translate3d(0, 0, 0);
+			backface-visibility: hidden;
+			perspective: 1000px;
+		}
+	}
+
+	&::after {
+		display: block;
+		position: absolute;
+		content: ' ';
+		width: 48px;
+		height: 48px;
+		background: url(chrome-extension://__MSG_@@extension_id__/img/icon-nope-26.png) no-repeat 50% 50%;
+	}
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	z-index: $zindex;
+	height: 48px;
+	width: 48px;
+	opacity: 1;
+	background: url(chrome-extension://__MSG_@@extension_id__/img/icon-48.png) no-repeat 50% 0;
+}
