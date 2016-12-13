@@ -16,6 +16,12 @@
           w: el.width,
           h: el.height
         };
+      if (el.tagName === 'CANVAS')
+        return {
+          s: el.toDataURL('png'),
+          w: el.width,
+          h: el.height
+        }
       var bg = window.getComputedStyle(el).backgroundImage;
       if (String.prototype.indexOf.call(bg, 'url(') !== -1)
         return {
@@ -61,7 +67,7 @@
       var a = document.createElement('a');
       a.className = 'link';
       a.href = img.s;
-      a.textContent = img.s;
+      a.textContent = img.s.substring(0, 128);
       var pica = document.createElement('a');
       pica.href = img.s;
       pica.appendChild(pic);

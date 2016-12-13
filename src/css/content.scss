@@ -1,10 +1,27 @@
 $pfx: 'imageundercursor-';
 $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 
+%reset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	width: auto;
+	height: auto;
+	font-size: 100%;
+	font: inherit;
+	float: none;
+	color: initial;
+	text-align: left;
+	vertical-align: baseline;
+}
+
 .#{$pfx}wrapper {
 	.arrow {
+		@extend %reset;
 		$size: 11px;
 		&::after {
+			@extend %reset;
 			top: 1px;
 			left: -$size;
 			position: absolute;
@@ -24,9 +41,11 @@ $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 	}
 
 	.body {
+		@extend %reset;
 		* {
-			font-size: 12px;
-			font-family: helvetica, aria, sans-serif;
+			@extend %reset;
+			font-size: 12px !important;
+			font-family: helvetica, arial, sans-serif !important;
 			color: #333;
 		}
 		margin: 0;
@@ -41,6 +60,10 @@ $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 		$padding: 6px;
 
 		li {
+			@extend %reset;
+			* {
+				@extend %reset;
+			}
 			.img {
 				width: $size;
 				height: $size;
@@ -54,7 +77,7 @@ $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 				border-radius: 2px;
 			}
 			.info {
-				font-size: 0.9em;
+				font-size: 11px;
 				color: #777;
 				line-height: 1;
 				top: 0;
@@ -125,6 +148,7 @@ $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 }
 
 .#{$pfx}wrapper-nope {
+	@extend %reset;
 	animation-timing-function: linear;
 	animation-fill-mode: both;
 	animation-duration: .7s;
