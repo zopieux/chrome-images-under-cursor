@@ -1,6 +1,6 @@
 # Images Under Cursor
 
-Chrome extension to find all images and background images laying under the
+Chrome extension to find all images, background images and background videos laying under the
 cursor, whatever their depth or nesting in the DOM tree. This extension also
 supports extracting the current frame of
 [canvas elements](https://en.wikipedia.org/wiki/Canvas_element).
@@ -15,11 +15,9 @@ ridiculous, as there are accessible anyway.
 
 ## Screenshots
 
-![Screenshot](/meta/sc-1.png?raw=true "Screenshot of context menu")
-
-![Screenshot](/meta/sc-2.png?raw=true "Screenshot with normal image")
-
-![Screenshot](/meta/sc-3.png?raw=true "Screenshot with background images")
+| Step 1: aim | Step 2: download |
+| --- | --- |
+| ![Screenshot](/meta/sc-2.png?raw=true "Context menu") | ![Screenshot](/meta/sc-3.png?raw=true "Result list") |
 
 ## Usage
 
