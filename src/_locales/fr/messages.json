@@ -2,6 +2,8 @@
   "root_menu": {"message": "Images sous curseur"},
   "app_name": {"message": "Images Sous Curseur"},
   "app_desc": {"message": "Trouve les images et images de fond qui se trouvent à l'endroit du curseur"},
+  "save_as": {"message": "Enregistrer…"},
+  "copy_link": {"message": "Copier le lien"},
   "bg_image": {"message": "image de fond"},
   "video": {"message": "vidéo"}
 }

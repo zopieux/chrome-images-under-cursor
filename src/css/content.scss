@@ -14,6 +14,7 @@ $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 	color: initial;
 	text-align: left;
 	vertical-align: baseline;
+	box-sizing: border-box;
 }
 
 .#{$pfx}wrapper {
@@ -44,7 +45,7 @@ $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 		@extend %reset;
 		* {
 			@extend %reset;
-			font-size: 12px !important;
+			font-size: 14px !important;
 			font-family: helvetica, arial, sans-serif !important;
 			color: #333;
 		}
@@ -52,11 +53,7 @@ $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 		padding: 0;
 		list-style-type: none;
 
-		li:not(:last-child) {
-			border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-		}
-
-		$size: 32px;
+		$size: 64px;
 		$padding: 6px;
 
 		li {
@@ -64,15 +61,29 @@ $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 			* {
 				@extend %reset;
 			}
+
+			position: relative;
+			padding: $padding;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			margin: 0;
+			height: $size + 2 * $padding;
+
+			&:not(:last-child) {
+				border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+				height: $size + 2 * $padding + 1px;
+			}
+
 			.img {
 				width: $size;
 				height: $size;
 				position: absolute;
 				background-size: contain;
-				background-repeat: none;
+				background-repeat: no-repeat;
+				background-position: center;
 				vertical-align: middle;
 				display: inline-block;
-				box-sizing: border-box;
 				border: 1px solid #aaa;
 				border-radius: 2px;
 				overflow: hidden;
@@ -83,13 +94,13 @@ $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 				object-fit: contain;
 			}
 			.info {
-				font-size: 11px;
+				/*font-size: 14px;*/
 				color: #777;
 				line-height: 1;
 				top: 0;
 				display: block;
 			}
-			.link, .info {
+			.link, .info, .btns {
 				margin-left: $size + $padding;
 			}
 			.link {
@@ -99,13 +110,43 @@ $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 			.link:hover {
 				text-decoration: underline;
 			}
-			box-sizing: border-box;
-			padding: $padding;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			margin: 0;
-			white-space: nowrap;
-			height: $size + 2 * $padding;
+			.btns {
+				position: absolute;
+				bottom: $padding;
+			}
+			.btn {
+				$h: 24px;
+				$fs: $h / 2;
+				$off: 4px;
+				display: inline-block;
+				height: $h;
+				vertical-align: bottom;
+				font: inherit;
+				font-size: $fs !important;
+				line-height: $h;
+				border: 1px solid #aaa;
+				border-radius: 2px;
+				padding-right: $off;
+				padding-left: $h;
+				background-size: $h - 10px;
+				background-repeat: no-repeat;
+				background-position: $off center;
+				&:not(:last-child) {
+					margin-right: 4px;
+				}
+				&.dl {
+					background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MzMuNSA0MzMuNSI+CiAgPHBhdGggZD0iTTM5NS4zIDE1M2gtMTAyVjBoLTE1M3YxNTNoLTEwMmwxNzguNCAxNzguNUwzOTUuNCAxNTN6bS0zNTcgMjI5LjV2NTFoMzU3di01MWgtMzU3eiIvPgo8L3N2Zz4K');
+				}
+				&.copy {
+					background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NSA1NSI+CiAgPHBhdGggZD0iTTUxLjIgMy44Yy01LTUtMTMuMy01LTE4LjQgMEwyMy42IDEzYy0uOC44LS44IDIgMCAyLjguOC44IDIgLjggMi44IDBsOS4yLTkuMkMzNy4zIDUgMzkuNiA0IDQyIDRjMi40IDAgNC43IDEgNi4zIDIuNnMyLjcgNCAyLjcgNi40YzAgMi40LTEgNC43LTIuNyA2LjRsLTEyIDEyYy0zLjUgMy41LTkuMiAzLjUtMTIuNyAwLS44LS44LTItLjgtMi44IDBzLS44IDIgMCAyLjhjMi41IDIuNSA1LjggMy44IDkuMiAzLjhzNi42LTEuMyA5LjItMy44bDEyLTEyYzIuNC0yLjUgMy44LTUuNyAzLjgtOS4yIDAtMy41LTEuNC02LjgtMy44LTkuMnoiLz4KICA8cGF0aCBkPSJNMjcgNDAuNmwtNy42IDcuN0MxNy43IDUwIDE1LjQgNTEgMTMgNTFjLTIuNCAwLTQuNy0xLTYuNC0yLjdDMyA0NC44IDMgMzkgNi42IDM1LjZMMTggMjQuM2MxLjYtMS43IDQtMi42IDYuMy0yLjYgMi40IDAgNC43IDEgNi40IDIuNi43LjggMiAuOCAyLjggMHMuOC0yIDAtMi44Yy01LTUtMTMuMy01LTE4LjQgMEw0IDMyLjhjLTIuNiAyLjQtNCA1LjctNCA5LjIgMCAzLjUgMS40IDYuNyAzLjggOS4yQzYuMiA1My42IDkuNSA1NSAxMyA1NWMzLjUgMCA2LjctMS40IDkuMi0zLjhsNy44LTcuOGMuNy0uOC43LTIgMC0yLjhzLTItLjgtMyAweiIvPgo8L3N2Zz4K');
+				}
+				&.flash {
+					animation: muFlash 1s ease;
+				}
+			}
+			.btn:hover {
+				background-color: #dedede;
+			}
 		}
 	}
 
@@ -150,6 +191,15 @@ $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 	}
     100% {
 		opacity: 0;
+	}
+}
+
+@keyframes muFlash {
+	10% {
+		background-color: rgba(85, 170, 85, 1);
+	}
+	0%, 100% {
+		background-color: rgba(85, 170, 85, 0);
 	}
 }
 

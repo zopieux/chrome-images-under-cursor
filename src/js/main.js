@@ -9,6 +9,16 @@
     });
   });
 
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.copy) {
+      document.addEventListener('copy', function(e) {
+        e.clipboardData.setData('text/plain', request.copy);
+        e.preventDefault();
+      });
+      document.execCommand('copy');
+    }
+  });
+
   chrome.contextMenus.onClicked.addListener((info, tab) => {
     if (!tab)
       return;

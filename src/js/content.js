@@ -66,6 +66,7 @@
     // build wbody items
     for (var img of imgs) {
       var li = document.createElement('li');
+      wbody.appendChild(li);
       var pic = document.createElement('div');
       pic.className = 'img';
       if (img.t === 'video') {
@@ -97,7 +98,31 @@
       else
         info.textContent = chrome.i18n.getMessage('bg_image');
       li.appendChild(info);
-      wbody.appendChild(li);
+      var buttons = document.createElement('div');
+      buttons.className = 'btns';
+      li.appendChild(buttons);
+      /* copy button */
+      var copyBut = document.createElement('button');
+      copyBut.className = 'btn copy';
+      copyBut.type = 'button';
+      copyBut.textContent = chrome.i18n.getMessage('copy_link');
+      copyBut.dataset.url = img.s;
+      copyBut.addEventListener('click', function(e) {
+        e.preventDefault();
+        chrome.runtime.sendMessage({copy: this.dataset.url});
+        this.classList.add('flash');
+        setTimeout(() => { this.classList.remove('flash'); }, 1010);
+      });
+      buttons.appendChild(copyBut);
+      /* download button */
+      var urlParts = img.s.split('/');
+      var name = urlParts[urlParts.length - 1];
+      var dlBut = document.createElement('a');
+      dlBut.className = 'btn dl';
+      dlBut.download = name;
+      dlBut.href = img.s;
+      dlBut.textContent = chrome.i18n.getMessage('save_as');
+      buttons.appendChild(dlBut);
     }
     w.style.display = 'block'; // display before computations so geometry is computed
     var l = Math.min(window.innerWidth - w.clientWidth - BOX_MARGIN * 2, Math.max(BOX_MARGIN, x - w.clientWidth / 2));

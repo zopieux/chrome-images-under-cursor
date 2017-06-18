@@ -10,7 +10,8 @@
   "default_locale": "en",
   "permissions": [
     "contextMenus",
-    "activeTab"
+    "activeTab",
+    "clipboardWrite"
   ],
   "icons": {
     "16": "img/menu-icon.png",
