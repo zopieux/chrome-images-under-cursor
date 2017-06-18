@@ -11,7 +11,8 @@ SVGRASTERDRAWING := inkscape --export-area-drawing
 PNGOPTIMIZE := optipng -quiet -clobber -preserve
 
 OBJS := src/css/content.css $(addprefix src/img/icon-,$(addsuffix .png,48 128)) src/img/icon-nope-26.png
-COPIED := src/manifest.json $(wildcard src/js/*.js) src/_locales src/img/menu-icon.png
+LOCALES := $(wildcard src/_locales/*/messages.json)
+COPIED := src/manifest.json $(wildcard src/js/*.js) $(LOCALES) src/img/menu-icon.png
 
 all: build
 
