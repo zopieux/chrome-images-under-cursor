@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3] 2017-06-18
+
+- Add support for video elements.
+- Add “Download” and “Copy link” buttons.
+- Larger user interface.
+
 ## [0.2] 2016-12-13
 
 - Add support for canvas elements.
