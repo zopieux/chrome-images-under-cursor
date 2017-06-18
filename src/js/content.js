@@ -14,13 +14,18 @@
         return {
           s: el.src,
           w: el.width,
-          h: el.height
+          h: el.height,
         };
       if (el.tagName === 'CANVAS')
         return {
           s: el.toDataURL('png'),
           w: el.width,
-          h: el.height
+          h: el.height,
+        }
+      if (el.tagName === 'VIDEO')
+        return {
+          s: el.src,
+          t: 'video',
         }
       var bg = window.getComputedStyle(el).backgroundImage;
       if (String.prototype.indexOf.call(bg, 'url(') !== -1)
@@ -35,7 +40,7 @@
       return;
     mousePos = {
       x: e.pageX,
-      y: e.pageY
+      y: e.pageY,
     };
     imgs = findImages(e.clientX, e.clientY);
   });
@@ -63,7 +68,17 @@
       var li = document.createElement('li');
       var pic = document.createElement('div');
       pic.className = 'img';
-      pic.style.backgroundImage = 'url("' + img.s + '")';
+      if (img.t === 'video') {
+        var vid = document.createElement('video');
+        vid.src = img.s;
+        vid.muted = true;
+        vid.autoplay = true;
+        vid.controls = false;
+        vid.className = 'video';
+        pic.appendChild(vid);
+      } else {
+        pic.style.backgroundImage = 'url("' + img.s + '")';
+      }
       var a = document.createElement('a');
       a.className = 'link';
       a.href = img.s;
@@ -75,7 +90,9 @@
       li.appendChild(a);
       var info = document.createElement('span');
       info.className = 'info';
-      if (img.w !== undefined && img.h !== undefined)
+      if (img.t === 'video')
+        info.textContent = chrome.i18n.getMessage('video');
+      else if (img.w !== undefined && img.h !== undefined)
         info.textContent = '' + img.w + '×' + img.h;
       else
         info.textContent = chrome.i18n.getMessage('bg_image');

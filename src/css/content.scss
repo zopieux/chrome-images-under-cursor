@@ -75,6 +75,12 @@ $zindex: 9999999999999; // yes, and I'm not even sure that's enough
 				box-sizing: border-box;
 				border: 1px solid #aaa;
 				border-radius: 2px;
+				overflow: hidden;
+			}
+			.video {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
 			}
 			.info {
 				font-size: 11px;

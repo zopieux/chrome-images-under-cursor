@@ -2,5 +2,6 @@
   "root_menu": {"message": "Images under cursor"},
   "app_name": {"message": "Images Under Cursor"},
   "app_desc": {"message": "Finds all images and background images laying under the cursor"},
-  "bg_image": {"message": "background image"}
+  "bg_image": {"message": "background image"},
+  "video": {"message": "video"}
 }
