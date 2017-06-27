@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4] 2017-06-27
+
+- Add support for SVG elements.
+- Add CSS resets to fix broken layouts on some websites using *flex*.
+
 ## [0.3] 2017-06-18
 
 - Add support for video elements.
