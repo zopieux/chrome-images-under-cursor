@@ -3,7 +3,7 @@
   "name": "__MSG_app_name__",
   "short_name": "IUC",
   "description": "__MSG_app_desc__",
-  "version": "0.3",
+  "version": "0.4",
   "author": "Alexandre Macabies",
   "homepage_url": "https://github.com/zopieux/chrome-images-under-cursor",
   "incognito": "spanning",
