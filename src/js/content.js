@@ -8,21 +8,46 @@
   var imgs = [];
   var w, warrow, wbody;
 
+  function encodeOptimizedSVGDataUri(svgString) {
+    // credits: https://codepen.io/tigt/post/optimizing-svgs-in-data-uris
+    var uriPayload =
+      encodeURIComponent(svgString.replace(/[\n\r\t]+/g, ''))
+      .replace(/%20/g, ' ')
+      .replace(/%3D/g, '=')
+      .replace(/%3A/g, ':')
+      .replace(/%2F/g, '/')
+      .replace(/%22/g, "'");
+    return 'data:image/svg+xml,' + uriPayload;
+  }
+
   function findImages(x, y) {
     return document.elementsFromPoint(x, y).map(el => {
-      if (el.tagName === 'IMG')
+      var tag = el.tagName.toUpperCase();
+      if (tag === 'IMG')
         return {
           s: el.src,
           w: el.width,
           h: el.height,
         };
-      if (el.tagName === 'CANVAS')
+      if (tag === 'SVG') {
+        var ns = el.getAttribute('xmlns');
+        if (!(ns && ns.length)) {
+          el = el.cloneNode(true);
+          el.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        }
+        return {
+          s: encodeOptimizedSVGDataUri(el.outerHTML),
+          t: 'svg',
+          name: 'image.svg',
+        };
+      }
+      if (tag === 'CANVAS')
         return {
           s: el.toDataURL('png'),
           w: el.width,
           h: el.height,
         }
-      if (el.tagName === 'VIDEO')
+      if (tag === 'VIDEO')
         return {
           s: el.src,
           t: 'video',
@@ -93,6 +118,8 @@
       info.className = 'info';
       if (img.t === 'video')
         info.textContent = chrome.i18n.getMessage('video');
+      else if (img.t === 'svg')
+        info.textContent = chrome.i18n.getMessage('svg');
       else if (img.w !== undefined && img.h !== undefined)
         info.textContent = '' + img.w + '×' + img.h;
       else
@@ -116,7 +143,7 @@
       buttons.appendChild(copyBut);
       /* download button */
       var urlParts = img.s.split('/');
-      var name = urlParts[urlParts.length - 1];
+      var name = img.name ? img.name : urlParts[urlParts.length - 1];
       var dlBut = document.createElement('a');
       dlBut.className = 'btn dl';
       dlBut.download = name;
