@@ -3,17 +3,17 @@
 (() => {
   const kClear = 0, kActive = 1, kClearing = 2;
 
-  var WRAPPER = 'imageundercursor-wrapper';
-  var ARROW_SIZE = 11, ARROW_Y_OFF = 2, BOX_MARGIN = 10;
+  const WRAPPER = 'imageundercursor-wrapper';
+  const ARROW_SIZE = 11, ARROW_Y_OFF = 2, BOX_MARGIN = 10;
 
-  var mousePos = {};
-  var clientPos = {};
-  var contextMenuInvoked = kClear;
-  var w, warrow, wbody;
+  let mousePos = {};
+  let clientPos = {};
+  let contextMenuInvoked = kClear;
+  let w, warrow, wbody;
 
   function encodeOptimizedSVGDataUri(svgString) {
     // credits: https://codepen.io/tigt/post/optimizing-svgs-in-data-uris
-    var uriPayload =
+    const uriPayload =
       encodeURIComponent(svgString.replace(/[\n\r\t]+/g, ''))
         .replace(/%20/g, ' ')
         .replace(/%3D/g, '=')
@@ -24,9 +24,8 @@
   }
 
   function findImages(x, y) {
-    console.log(document, x, y);
     return document.elementsFromPoint(x, y).map(el => {
-      var tag = el.tagName.toUpperCase();
+      const tag = el.tagName.toUpperCase();
       if (tag === 'IMG')
         return {
           s: el.src,
@@ -34,7 +33,7 @@
           h: el.height,
         };
       if (tag === 'SVG') {
-        var ns = el.getAttribute('xmlns');
+        const ns = el.getAttribute('xmlns');
         if (!(ns && ns.length)) {
           el = el.cloneNode(true);
           el.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
@@ -50,13 +49,13 @@
           s: el.toDataURL('png'),
           w: el.width,
           h: el.height,
-        }
+        };
       if (tag === 'VIDEO')
         return {
           s: el.src,
           t: 'video',
-        }
-      var bg = window.getComputedStyle(el).backgroundImage;
+        };
+      const bg = window.getComputedStyle(el).backgroundImage;
       if (String.prototype.indexOf.call(bg, 'url(') !== -1)
         return {
           s: bg.replace(/^url\(['"]?([^'"]+)['"]?\)/, '$1')
@@ -110,10 +109,10 @@
 
     const imgs = findImages(clientPos.x, clientPos.y);
 
-    var x = mousePos.x, y = mousePos.y;
+    const x = mousePos.x, y = mousePos.y;
     if (!imgs.length) {
       // display "nope" icon
-      var nope = document.createElement('div');
+      const nope = document.createElement('div');
       nope.className = WRAPPER + '-nope';
       nope.addEventListener('webkitAnimationEnd', (e) => {
         nope.remove();
@@ -126,13 +125,13 @@
     }
     wbody.innerHTML = ''; // empty wbody
     // build wbody items
-    for (var img of imgs) {
-      var li = document.createElement('li');
+    for (let img of imgs) {
+      const li = document.createElement('li');
       wbody.appendChild(li);
-      var pic = document.createElement('div');
+      const pic = document.createElement('div');
       pic.className = 'img';
       if (img.t === 'video') {
-        var vid = document.createElement('video');
+        const vid = document.createElement('video');
         vid.src = img.s;
         vid.muted = true;
         vid.autoplay = true;
@@ -142,16 +141,16 @@
       } else {
         pic.style.backgroundImage = 'url("' + img.s + '")';
       }
-      var a = document.createElement('a');
+      const a = document.createElement('a');
       a.className = 'link';
       a.href = img.s;
       a.textContent = img.s.substring(0, 128);
-      var pica = document.createElement('a');
+      const pica = document.createElement('a');
       pica.href = img.s;
       pica.appendChild(pic);
       li.appendChild(pica);
       li.appendChild(a);
-      var info = document.createElement('span');
+      const info = document.createElement('span');
       info.className = 'info';
       if (img.t === 'video')
         info.textContent = chrome.i18n.getMessage('video');
@@ -162,11 +161,11 @@
       else
         info.textContent = chrome.i18n.getMessage('bg_image');
       li.appendChild(info);
-      var buttons = document.createElement('div');
+      const buttons = document.createElement('div');
       buttons.className = 'btns';
       li.appendChild(buttons);
       /* copy button */
-      var copyBut = document.createElement('button');
+      const copyBut = document.createElement('button');
       copyBut.className = 'btn copy';
       copyBut.type = 'button';
       copyBut.textContent = chrome.i18n.getMessage('copy_link');
@@ -179,9 +178,9 @@
       });
       buttons.appendChild(copyBut);
       /* download button */
-      var urlParts = img.s.split('/');
-      var name = img.name ? img.name : urlParts[urlParts.length - 1];
-      var dlBut = document.createElement('a');
+      const urlParts = img.s.split('/');
+      const name = img.name ? img.name : urlParts[urlParts.length - 1];
+      const dlBut = document.createElement('a');
       dlBut.className = 'btn dl';
       dlBut.download = name;
       dlBut.href = img.s;
@@ -189,7 +188,7 @@
       buttons.appendChild(dlBut);
     }
     w.style.display = 'block'; // display before computations so geometry is computed
-    var l = Math.min(window.innerWidth - w.clientWidth - BOX_MARGIN * 2, Math.max(BOX_MARGIN, x - w.clientWidth / 2));
+    const l = Math.min(window.innerWidth - w.clientWidth - BOX_MARGIN * 2, Math.max(BOX_MARGIN, x - w.clientWidth / 2));
     warrow.style.left = Math.min(window.innerWidth - BOX_MARGIN, Math.max(BOX_MARGIN, x - l - ARROW_SIZE / 2)) + 'px';
     w.style.left = l + 'px';
     w.style.top = y + ARROW_SIZE + ARROW_Y_OFF + 'px';
