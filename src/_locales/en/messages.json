@@ -1,10 +1,29 @@
 {
-  "root_menu": {"message": "Images under cursor"},
-  "app_name": {"message": "Images Under Cursor"},
-  "app_desc": {"message": "Finds all images and background images laying under the cursor"},
-  "save_as": {"message": "Save as…"},
-  "copy_link": {"message": "Copy link"},
-  "bg_image": {"message": "background image"},
-  "video": {"message": "video"},
-  "svg": {"message": "SVG (vector image)"}
+  "root_menu": {
+    "message": "Images under cursor"
+  },
+  "app_name": {
+    "message": "Images Under Cursor"
+  },
+  "app_desc": {
+    "message": "Finds all images and background images laying under the cursor"
+  },
+  "save_as": {
+    "message": "Save as…"
+  },
+  "copy_link": {
+    "message": "Copy link"
+  },
+  "bg_image": {
+    "message": "background image"
+  },
+  "video": {
+    "message": "video"
+  },
+  "svg": {
+    "message": "SVG (vector image)"
+  },
+  "invoke_cmd_desc": {
+    "message": "Invoke Images Under Cursor"
+  }
 }

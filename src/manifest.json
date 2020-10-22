@@ -3,7 +3,7 @@
   "name": "__MSG_app_name__",
   "short_name": "IUC",
   "description": "__MSG_app_desc__",
-  "version": "0.4",
+  "version": "0.5",
   "author": "Alexandre Macabies",
   "homepage_url": "https://github.com/zopieux/chrome-images-under-cursor",
   "incognito": "spanning",
@@ -19,15 +19,32 @@
     "128": "img/icon-128.png"
   },
   "background": {
-    "scripts": ["js/main.js"],
+    "scripts": [
+      "js/main.js"
+    ],
     "persistent": false
+  },
+  "commands": {
+    "invoke": {
+      "description": "__MSG_invoke_cmd_desc__",
+      "suggested_key": {
+        "default": "Ctrl+Shift+F"
+      },
+      "global": false
+    }
   },
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
+      "matches": [
+        "*://*/*"
+      ],
       "all_frames": true,
-      "js": ["js/content.js"],
-      "css": ["css/content.css"]
+      "js": [
+        "js/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ]
     }
   ],
   "web_accessible_resources": [

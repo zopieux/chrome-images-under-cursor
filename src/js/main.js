@@ -1,6 +1,11 @@
 'use strict';
 
 (() => {
+
+  function showInTab(tab) {
+    chrome.tabs.sendMessage(tab.id, 'show', null);
+  }
+
   chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
       id: 'context-iuc',
@@ -9,12 +14,12 @@
     });
   });
 
-  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.copy) {
-      document.addEventListener('copy', function(e) {
+      document.addEventListener('copy', function (e) {
         e.clipboardData.setData('text/plain', request.copy);
         e.preventDefault();
-      });
+      }, { once: true });
       document.execCommand('copy');
     }
   });
@@ -22,6 +27,15 @@
   chrome.contextMenus.onClicked.addListener((info, tab) => {
     if (!tab)
       return;
-    chrome.tabs.sendMessage(tab.id, 'show', null);
+    showInTab(tab);
   });
+
+  chrome.commands.onCommand.addListener(function (command) {
+    if (command !== "invoke")
+      return;
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      tabs.forEach(tab => showInTab(tab));
+    });
+  });
+
 })();
