@@ -1,26 +1,30 @@
 'use strict';
 
 (() => {
+  const kClear = 0, kActive = 1, kClearing = 2;
+
   var WRAPPER = 'imageundercursor-wrapper';
   var ARROW_SIZE = 11, ARROW_Y_OFF = 2, BOX_MARGIN = 10;
 
   var mousePos = {};
-  var imgs = [];
+  var clientPos = {};
+  var contextMenuInvoked = kClear;
   var w, warrow, wbody;
 
   function encodeOptimizedSVGDataUri(svgString) {
     // credits: https://codepen.io/tigt/post/optimizing-svgs-in-data-uris
     var uriPayload =
       encodeURIComponent(svgString.replace(/[\n\r\t]+/g, ''))
-      .replace(/%20/g, ' ')
-      .replace(/%3D/g, '=')
-      .replace(/%3A/g, ':')
-      .replace(/%2F/g, '/')
-      .replace(/%22/g, "'");
+        .replace(/%20/g, ' ')
+        .replace(/%3D/g, '=')
+        .replace(/%3A/g, ':')
+        .replace(/%2F/g, '/')
+        .replace(/%22/g, "'");
     return 'data:image/svg+xml,' + uriPayload;
   }
 
   function findImages(x, y) {
+    console.log(document, x, y);
     return document.elementsFromPoint(x, y).map(el => {
       var tag = el.tagName.toUpperCase();
       if (tag === 'IMG')
@@ -60,19 +64,52 @@
     }).filter(el => !!el);
   }
 
+  // Contextual menu (right click) invoked, remember that. This is brittle
+  // since a right click does not necessarily correspond to a contextual menu,
+  // but we can't do better: there is no "browser context menu open/close"
+  // event we could listen to.
   document.addEventListener('mousedown', (e) => {
     if (e.button !== 2)
+      return;
+    contextMenuInvoked = kActive;
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    // When the contextual menu closes, there are a few mousemove events fired
+    // before our "show" message is received (listener below).
+    // Therefore, give some time (200ms works fine on my machine) for these to
+    // fire before clearing the contextMenuInvoked flag so the next invocation
+    // will point to the correct location.
+    // The delay value is a trade-off:
+    //   * if the delay is too small, the search might happen where the mouse
+    //     is right after the context menu closes, which is silly.
+    //   * if the delay is too large, and the user makes two searches quickly,
+    //     both searches will point to the same location, which is also silly.
+    if (contextMenuInvoked === kActive) {
+      contextMenuInvoked = kClearing;
+      setTimeout(function () {
+        contextMenuInvoked = kClear;
+      }, 200/*ms*/);
+      return;
+    }
+    if (contextMenuInvoked === kClearing)
       return;
     mousePos = {
       x: e.pageX,
       y: e.pageY,
     };
-    imgs = findImages(e.clientX, e.clientY);
+    clientPos = {
+      x: e.clientX,
+      y: e.clientY,
+    };
   });
 
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request !== 'show')
       return;
+
+    const imgs = findImages(clientPos.x, clientPos.y);
+
     var x = mousePos.x, y = mousePos.y;
     if (!imgs.length) {
       // display "nope" icon
@@ -134,9 +171,9 @@
       copyBut.type = 'button';
       copyBut.textContent = chrome.i18n.getMessage('copy_link');
       copyBut.dataset.url = img.s;
-      copyBut.addEventListener('click', function(e) {
+      copyBut.addEventListener('click', function (e) {
         e.preventDefault();
-        chrome.runtime.sendMessage({copy: this.dataset.url});
+        chrome.runtime.sendMessage({ copy: this.dataset.url });
         this.classList.add('flash');
         setTimeout(() => { this.classList.remove('flash'); }, 1010);
       });
