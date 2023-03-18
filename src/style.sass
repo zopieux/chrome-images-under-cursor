@@ -1,0 +1,111 @@
+$fg: CanvasText
+$gap: 12px
+
+body
+  background-color: #eaeaea
+  color: $fg
+  display: flex
+  //height: 90px
+  //width: 90px
+  overflow: hidden
+  align-items: center
+  justify-content: center
+  margin: 0
+  padding: 0
+  font: menu
+
+.img-preview
+  &.loading
+    min-width: 128px
+    min-height: 128px
+
+    & > main
+      display: none
+
+#empty
+  padding: $gap*4
+
+#instruct
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  max-width: 30ch
+  padding: $gap*4
+  padding-top: $gap*2
+
+  img
+    object-fit: contain
+    max-width: 64px
+
+  div
+    text-align: center
+
+
+main
+  $w: 16ch
+  display: flex
+  flex-direction: row
+  //position: fixed
+  //top: 0
+  //bottom: 0
+  //left: 0
+  //right: 0
+  align-items: center
+  justify-content: center
+  gap: $gap
+  padding: $gap
+  //z-index: 2147483647
+  //background-color: opacify($bg, 0.87)
+
+  & > .element
+    display: flex
+    flex-direction: column
+    gap: calc($gap / 2)
+    width: $w
+    color: $fg
+    //align-items: center
+
+    & > a[download]
+      font: inherit
+      color: inherit
+      cursor: pointer
+      text-decoration: none
+      text-align: center
+      //padding-inline: 1rem
+      //margin-inline: -1rem
+
+    & > span.size
+      white-space: nowrap
+      font-size: 0.9rem
+
+      &.unknown
+        color: GrayText
+
+    & > .img-wrap
+      display: flex
+      width: 100%
+      height: $w
+      align-content: center
+      justify-content: center
+      background: #4a4a4a url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".25"><rect x="8" width="8" height="8"/><rect y="8" width="8" height="8"/></svg>')
+      background-repeat: repeat
+      //border: 1px solid #333333
+      overflow: hidden
+      border-radius: 3px
+      //box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4)
+
+      & > img, & > video
+        flex: 0
+        $m: 0%
+        max-width: 100%
+        max-height: 100%
+        margin-top: $m
+        object-fit: contain
+        object-position: center
+
+      // 2023Q1: Firefox doesn't support :has.
+      //&[data-kind=video]
+      //  background: transparent
+      //&:has(> video)
+      //  background: transparent

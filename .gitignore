@@ -1,6 +1,10 @@
 build/
+dist/
+node_modules/
 src/img/icon-*.png
+src/manifest.json
 .sass-cache/
+.parcel-cache/
 *.css
 *.css.map
 *.crx

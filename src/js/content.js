@@ -1,5 +1,7 @@
 'use strict';
 
+const browser = require("webextension-polyfill");
+
 (() => {
   const kClear = 0, kActive = 1, kClearing = 2;
 
@@ -103,7 +105,7 @@
     };
   });
 
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request !== 'show')
       return;
 
@@ -153,13 +155,13 @@
       const info = document.createElement('span');
       info.className = 'info';
       if (img.t === 'video')
-        info.textContent = chrome.i18n.getMessage('video');
+        info.textContent = browser.i18n.getMessage('video');
       else if (img.t === 'svg')
-        info.textContent = chrome.i18n.getMessage('svg');
+        info.textContent = browser.i18n.getMessage('svg');
       else if (img.w !== undefined && img.h !== undefined)
         info.textContent = '' + img.w + '×' + img.h;
       else
-        info.textContent = chrome.i18n.getMessage('bg_image');
+        info.textContent = browser.i18n.getMessage('bg_image');
       li.appendChild(info);
       const buttons = document.createElement('div');
       buttons.className = 'btns';
@@ -168,11 +170,11 @@
       const copyBut = document.createElement('button');
       copyBut.className = 'btn copy';
       copyBut.type = 'button';
-      copyBut.textContent = chrome.i18n.getMessage('copy_link');
+      copyBut.textContent = browser.i18n.getMessage('copy_link');
       copyBut.dataset.url = img.s;
       copyBut.addEventListener('click', function (e) {
         e.preventDefault();
-        chrome.runtime.sendMessage({ copy: this.dataset.url });
+        browser.runtime.sendMessage({ copy: this.dataset.url });
         this.classList.add('flash');
         setTimeout(() => { this.classList.remove('flash'); }, 1010);
       });
@@ -184,7 +186,7 @@
       dlBut.className = 'btn dl';
       dlBut.download = name;
       dlBut.href = img.s;
-      dlBut.textContent = chrome.i18n.getMessage('save_as');
+      dlBut.textContent = browser.i18n.getMessage('save_as');
       buttons.appendChild(dlBut);
     }
     w.style.display = 'block'; // display before computations so geometry is computed

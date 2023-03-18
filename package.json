@@ -1,0 +1,73 @@
+{
+  "name": "chrome-images-under-cursor",
+  "version": "0.5.0",
+  "description": "Images under cursor",
+  "repository": "git@github.com:Zopieux/chrome-images-under-cursor.git",
+  "author": "Alexandre Macabies <web+oss@zopieux.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@parcel/config-webextension": "^2.8.3",
+    "@parcel/optimizer-data-url": "2.8.3",
+    "@parcel/transformer-inline-string": "2.8.3",
+    "@parcel/transformer-sass": "^2.8.3",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "eslint": "^8.34.0",
+    "parcel": "^2.8.3",
+    "typescript": "^4.9.5",
+    "web-ext": "^7.5.0"
+  },
+  "scripts": {
+    "switch:firefox": "cp -f src/manifest.v2.json src/manifest.json && chmod -w src/manifest.json",
+    "switch:chrome": "cp -f src/manifest.v3.json src/manifest.json && chmod -w src/manifest.json",
+    "watch": "parcel watch src/manifest.json --config @parcel/config-webextension --host localhost --no-cache --no-content-hash --no-hmr",
+    "build": "parcel build src/manifest.json --config @parcel/config-webextension --no-cache --no-content-hash --no-source-maps --detailed-report 0",
+    "package:firefox": "web-ext build --overwrite-dest --source-dir dist --filename firefox.zip",
+    "package:chrome": "web-ext build --overwrite-dest --source-dir dist --filename chrome.zip",
+    "run": "web-ext run --devtools --source-dir=dist",
+    "run:chrome": "web-ext run -t chromium --devtools --source-dir=dist",
+    "start": "parcel watch src/manifest.json --host localhost --config @parcel/config-webextension"
+  },
+  "dependencies": {
+    "@types/webextension-polyfill": "^0.10.0",
+    "webextension-polyfill": "^0.10.0"
+  },
+  "browserslist": [
+    "last 1 Chrome version",
+    "last 1 Firefox version"
+  ],
+  "@parcel/bundler-default": {
+    "minBundles": 10000000,
+    "minBundleSize": 3000,
+    "maxParallelRequests": 20
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2021,
+      "sourceType": "module"
+    },
+    "root": true,
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "semi": [
+        "error",
+        "never"
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "indent": [
+        "error",
+        2
+      ]
+    },
+    "env": {
+      "browser": true,
+      "es6": true
+    }
+  }
+}

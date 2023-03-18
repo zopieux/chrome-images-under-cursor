@@ -8,22 +8,52 @@
   "app_desc": {
     "message": "Finds all images and background images laying under the cursor"
   },
+  "open": {
+    "message": "Open"
+  },
   "save_as": {
     "message": "Save as…"
   },
   "copy_link": {
     "message": "Copy link"
   },
-  "bg_image": {
-    "message": "background image"
-  },
-  "video": {
-    "message": "video"
-  },
-  "svg": {
-    "message": "SVG (vector image)"
+  "copy_copied": {
+    "message": "Copied! ✓"
   },
   "invoke_cmd_desc": {
-    "message": "Invoke Images Under Cursor"
+    "message": "Find Images Under Cursor"
+  },
+  "empty": {
+    "message": "\uD83E\uDD14 \uD83D\uDCF7 No image found at this location, sorry!"
+  },
+  "usage": {
+    "message": "To find images, do not click on this icon. Instead, right-click anywhere on the page and pick “Find Images Under Cursor”, or use the keyboard shortcut."
+  },
+  "unknown_size": {
+    "message": "unknown size"
+  },
+  "type_image": {
+    "message": "Image"
+  },
+  "type_canvas": {
+    "message": "Canvas image"
+  },
+  "type_background": {
+    "message": "Background"
+  },
+  "type_backgroundcrop": {
+    "message": "Background, cropped"
+  },
+  "type_video": {
+    "message": "Video"
+  },
+  "type_pseudo": {
+    "message": "Pseudo"
+  },
+  "type_pseudocrop": {
+    "message": "Pseudo, cropped"
+  },
+  "type_svg": {
+    "message": "SVG (vector)"
   }
 }

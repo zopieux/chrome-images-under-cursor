@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>@import "style.sass";</style>
+</head>
+<body class="img-preview loading">
+<svg xmlns="http://www.w3.org/2000/svg" id="spinner" width="38" height="38"><defs><linearGradient id="a" x1="8.04%" x2="65.68%" y1="0%" y2="23.86%"><stop offset="0%" stop-color="#3a3aa" stop-opacity="0"/><stop offset="63.15%" stop-color="#3a3aa" stop-opacity=".63"/><stop offset="100%" stop-color="#3a3aa"/></linearGradient></defs><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><path stroke="url(#a)" stroke-width="2" d="M36 18A18 18 0 0 0 18 0"><animateTransform attributeName="transform" dur="0.9s" from="0 18 18" repeatCount="indefinite" to="360 18 18" type="rotate"/></path><circle cx="36" cy="18" r="1" fill="#3a3aa"><animateTransform attributeName="transform" dur="0.9s" from="0 18 18" repeatCount="indefinite" to="360 18 18" type="rotate"/></circle></g></svg>
+<div id="instruct" style="display: none">
+    <img src="data-url:./img/icon-128.png"/>
+    <div></div>
+</div>
+<div id="empty" style="display: none"></div>
+<main></main>
+<script src="popup.ts" type="module"></script>
+</body>
+</html>
