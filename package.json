@@ -19,8 +19,8 @@
     "web-ext": "^7.5.0"
   },
   "scripts": {
-    "switch:firefox": "cp -f src/manifest.v2.json src/manifest.json && chmod -w src/manifest.json",
-    "switch:chrome": "cp -f src/manifest.v3.json src/manifest.json && chmod -w src/manifest.json",
+    "switch:v2": "cp -f src/manifest.v2.json src/manifest.json && chmod -w src/manifest.json",
+    "switch:v3": "cp -f src/manifest.v3.json src/manifest.json && chmod -w src/manifest.json",
     "watch": "parcel watch src/manifest.json --config @parcel/config-webextension --host localhost --no-cache --no-content-hash --no-hmr",
     "build": "parcel build src/manifest.json --config @parcel/config-webextension --no-cache --no-content-hash --no-source-maps --detailed-report 0",
     "package:firefox": "web-ext build --overwrite-dest --source-dir dist --filename firefox.zip",
