@@ -1,10 +1,11 @@
 build/
 dist/
 node_modules/
-src/img/icon-*.png
-src/manifest.json
+web-ext-artifacts/
 .sass-cache/
 .parcel-cache/
+src/img/icon-*.png
+src/manifest.json
 *.css
 *.css.map
 *.crx
