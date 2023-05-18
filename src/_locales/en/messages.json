@@ -6,7 +6,7 @@
     "message": "Images Under Cursor"
   },
   "app_desc": {
-    "message": "Finds all images and background images laying under the cursor"
+    "message": "Finds all sorts of images and videos located under the cursor"
   },
   "open": {
     "message": "Open"
@@ -24,10 +24,10 @@
     "message": "Find Images Under Cursor"
   },
   "empty": {
-    "message": "\uD83E\uDD14 \uD83D\uDCF7 No image found at this location, sorry!"
+    "message": "🤔 📷 No image or video found at this location, sorry!"
   },
   "usage": {
-    "message": "To find images, do not click on this icon. Instead, right-click anywhere on the page and pick “Find Images Under Cursor”, or use the keyboard shortcut."
+    "message": "To find images, do not click on this icon. Instead, right-click anywhere on the page and pick “Find Images Under Cursor”. You can also use the keyboard shortcut."
   },
   "unknown_size": {
     "message": "unknown size"

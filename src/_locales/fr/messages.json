@@ -6,7 +6,10 @@
     "message": "Images Sous Curseur"
   },
   "app_desc": {
-    "message": "Trouve les images et images de fond qui se trouvent à l'endroit du curseur"
+    "message": "Trouve toutes sortes d'images et vidéos situées sous le curseur"
+  },
+  "open": {
+    "message": "Ouvrir"
   },
   "save_as": {
     "message": "Enregistrer…"
@@ -14,16 +17,43 @@
   "copy_link": {
     "message": "Copier le lien"
   },
-  "bg_image": {
-    "message": "image de fond"
-  },
-  "video": {
-    "message": "vidéo"
-  },
-  "svg": {
-    "message": "SVG (image vectorielle)"
+  "copy_copied": {
+    "message": "Copié !"
   },
   "invoke_cmd_desc": {
     "message": "Lance Images Sous Curseur"
+  },
+  "empty": {
+    "message": "🤔 📷 Aucune image ou vidéo n'a été trouvée à cet endroit, désolé !"
+  },
+  "usage": {
+    "message": "Pour trouver des images, ne cliquez pas sur cette icône. À la place, cliquez avec le bouton droit de la souris n'importe où sur la page et choisissez « Images Sous Curseur ». Il est également possible d'utiliser le raccourci clavier."
+  },
+  "unknown_size": {
+    "message": "taille inconnue"
+  },
+  "type_image": {
+    "message": "Image"
+  },
+  "type_canvas": {
+    "message": "Image canvas"
+  },
+  "type_background": {
+    "message": "Arrière-plan"
+  },
+  "type_backgroundcrop": {
+    "message": "Arrière-plan, recardé"
+  },
+  "type_video": {
+    "message": "Vidéo"
+  },
+  "type_pseudo": {
+    "message": "Pseudo"
+  },
+  "type_pseudocrop": {
+    "message": "Pseudo, recardé"
+  },
+  "type_svg": {
+    "message": "SVG (vectoriel)"
   }
 }
