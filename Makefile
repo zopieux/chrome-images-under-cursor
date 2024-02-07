@@ -20,17 +20,17 @@ all: build
 	$(SASS) $<:$@
 
 src/img/icon-%.png: src/img/icon.svg
-	$(SVGRASTER) -w $* --export-png $@ $<
+	$(SVGRASTER) -w $* --export-filename $@ $<
 	$(PNGOPTIMIZE) $@
 
 package-icon.png: src/img/icon.svg
-	$(SVGRASTER) -w 96 --export-png nb-$@ $<
+	$(SVGRASTER) -w 96 --export-filename nb-$@ $<
 	convert nb-$@ -bordercolor transparent -border 16 $@
 	$(RM) nb-$@
 	$(PNGOPTIMIZE) $@
 
 src/img/icon-nope-%.png: src/img/icon-nope.svg
-	$(SVGRASTERDRAWING) -w $* --export-png $@ $<
+	$(SVGRASTERDRAWING) -w $* --export-filename $@ $<
 	$(PNGOPTIMIZE) $@
 
 build: $(OBJS) $(COPIED)
