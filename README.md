@@ -11,37 +11,36 @@ ridiculous, as there are accessible anyway.
 
 ## Install from Chrome Web Store
 
-[![Install from Store](/meta/store-button.png?raw=true)](https://chrome.google.com/webstore/detail/images-under-cursor/kjfcpinmimcpiabejchhneahpajgklcj)
+[![Install from Store](/.github/store-button.png?raw=true)](https://chrome.google.com/webstore/detail/images-under-cursor/kjfcpinmimcpiabejchhneahpajgklcj)
 
 ## Screenshots
 
 | Step 1: aim | Step 2: download |
 | --- | --- |
-| ![Screenshot](/meta/sc-2.png?raw=true "Context menu") | ![Screenshot](/meta/sc-3.png?raw=true "Result list") |
+| ![Screenshot](/.github/sc-1.png?raw=true "Context menu")  | ![Screenshot](/.github/sc-2.png?raw=true "Result list") |
 
 ## Usage
 
 1. Install the extension;
     - There is *no* icon added to the browser user interface.
-1. On any web page, right-click on the image or canvas you want to extract;
-1. Choose *Images under cursor* in the contextual menu;
-1. All images will be displayed in a pop-over listing along with their URL.
-    - If no image is found, a quick animation will be displayed instead.
+1. On any web page, aim with your cursor the element (image, video) you want.
+1. Right-click or press Ctrl+Shift+F (customizable) to trigger *Images Under Cursor*.
+1. All found images & videos will be displayed in a pop-over.
 
 ## Development
 
 ### Building
 
-Dependencies: chrome or chromium, sass, inkscape, optipng, make, tar, zip
-
 ```shell
-$ make
+$ nix develop
+$ yarn install
+$ yarn run build
 ```
 
-### Installing
+### Local installation
 
-In [`chrome://extensions/`](chrome://extensions/), open  *Load unpacked
-extension* and chose the `build/` folder generated during the  build.
+* Chrome: In `chrome://extensions/`, click *Load unpacked extension* and pick the `dist/` folder.
+* Firefox: In `about:debugging#/runtime/this-firefox`, open *Load Temporary Add-on…* and pick the `dist/manifest.json` file.
 
 ## License
 
