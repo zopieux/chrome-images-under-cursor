@@ -1,6 +1,8 @@
 name: Build
 
-on: push
+on: 
+  push:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -29,11 +31,8 @@ jobs:
       - name: Build firefox-debug
         run: yarn run package:firefox-debug
 
-      - name: Build firefox-release-unlisted
-        run: yarn run package:firefox-release-unlisted
-
       - name: Build firefox-release-listed
-        if: startsWith(github.event.ref, 'refs/tags/v')
+        if: github.event_name == 'workflow_dispatch'
         run: yarn run package:firefox-release-listed
 
       - uses: actions/upload-artifact@v4
