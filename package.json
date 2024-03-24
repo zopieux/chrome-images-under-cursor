@@ -1,0 +1,44 @@
+{
+  "name": "images-under-cursor",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "parcel watch src/manifest.json --host localhost --config @parcel/config-webextension",
+    "build": "parcel build src/manifest.json --config @parcel/config-webextension --no-content-hash --no-source-maps",
+    "patch-manifest-for-firefox": "cp dist/manifest.json dist/manifest_.json && jq -s -c '(.[0] * .[1]) | (.background.scripts = [.background.service_worker]) | (del(.background.service_worker))' dist/manifest_.json src/manifest.firefox.json > dist/manifest.json && rm dist/manifest_.json",
+    "package:chrome": "rm -rf dist && yarn run build && web-ext build --overwrite-dest --source-dir dist --filename chrome.zip",
+    "package:firefox-debug": "rm -rf dist && yarn run build && yarn run patch-manifest-for-firefox && web-ext build --overwrite-dest --source-dir dist --filename firefox-debug.zip",
+    "package:firefox-release-unlisted": "rm -rf dist && yarn run build && yarn run patch-manifest-for-firefox && web-ext sign --source-dir dist --use-submission-api --channel=unlisted --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET",
+    "package:firefox-release-listed": "rm -rf dist && yarn run build && yarn run patch-manifest-for-firefox && web-ext sign --source-dir dist --use-submission-api --channel=listed --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET"
+  },
+  "dependencies": {
+    "@types/webextension-polyfill": "^0.10.7",
+    "preact": "^10.20.1",
+    "query-selector-shadow-dom": "^1.0.1",
+    "webextension-polyfill": "^0.10.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.9.0",
+    "@parcel/config-webextension": "^2.12.0",
+    "@parcel/optimizer-data-url": "2.12.0",
+    "@parcel/transformer-inline-string": "^2.12.0",
+    "@parcel/transformer-raw": "^2.12.0",
+    "@parcel/transformer-sass": "^2.12.0",
+    "@parcel/transformer-svgo": "^2.0.0-nightly.1739",
+    "@types/query-selector-shadow-dom": "^1.0.4",
+    "eslint": "^8.57.0",
+    "eslint-plugin-format": "^0.1.0",
+    "parcel": "^2.12.0",
+    "typescript": "^5.4.3",
+    "web-ext": "^7.11.0"
+  },
+  "alias": {
+    "preact/jsx-dev-runtime": "preact/jsx-runtime"
+  },
+  "@parcel/bundler-default": {
+    "minBundles": 10000000,
+    "minBundleSize": 3000,
+    "maxParallelRequests": 20
+  }
+}

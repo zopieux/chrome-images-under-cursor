@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] 2023-03-24
+
+- Complete rewrite!
+- Add support for shadow DOM nested elements.
+- Only show images actually under the cursor.
+- Revamped the modal UI.
+- Switched to Manifest V3.
+- Switched to modern development tooling.
+
 ## [0.4] 2017-06-27
 
 - Add support for SVG elements.

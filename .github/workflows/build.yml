@@ -1,0 +1,43 @@
+name: Build
+
+on: push
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      AMO_JWT_ISSUER: "${{ secrets.AMO_JWT_ISSUER }}"
+      AMO_JWT_SECRET: "${{ secrets.AMO_JWT_SECRET }}"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: Install
+        run: yarn install
+      
+      - name: Build chrome
+        run: yarn run package:chrome
+
+      - name: Build firefox-debug
+        run: yarn run package:firefox-debug
+
+      - name: Build firefox-release-unlisted
+        run: yarn run package:firefox-release-unlisted
+
+      - name: Build firefox-release-listed
+        if: startsWith(github.event.ref, 'refs/tags/v')
+        run: yarn run package:firefox-release-listed
+
+      - uses: actions/upload-artifact@v4
+        with:
+          if-no-files-found: error
+          name: zips-xpis
+          path: web-ext-artifacts/*

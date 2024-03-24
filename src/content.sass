@@ -1,0 +1,104 @@
+$base: 16px
+$size: 96px
+$logoSize: 70px
+$radius: 3px
+$black: #1b1b1b
+
+@mixin reset
+  font-family: sans-serif !important
+  color: $black
+  margin: 0
+  padding: 0
+  border: 0
+  font-size: 18px
+  vertical-align: baseline
+  line-height: 1
+
+:root, body
+  @include reset
+  
+main
+  @include reset
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  display: flex
+  justify-content: center
+  align-items: center
+  backdrop-filter: blur(12px) grayscale(100%)
+
+  > div
+    height: 100vh
+    padding-block: $base
+    min-width: $base * 20
+    display: flex
+    justify-content: center
+    flex-direction: column
+    align-items: center
+    gap: $base * 0.8
+
+    > .logo
+      content: ''
+      height: $logoSize
+      aspect-ratio: 1
+      background: url('data-url:./img/icon.svg') no-repeat
+
+    > .shortcut 
+      font-size: small
+      color: $black
+      background: white
+      margin-block-start: 1ch
+      padding: 1ch
+      text-align: center
+      border-radius: $radius
+      text-rendering: optimizeLegibility
+      
+    > .scroll
+      overflow-y: auto
+      display: flex
+      flex-direction: column
+      padding: $base
+      gap: $base
+      border-radius: $radius
+      background: white
+      box-shadow: 0 0 3px 0 rgba(0,0,0,0.5)
+
+      > .empty
+        display: flex
+        align-items: center
+        min-height: $size
+        padding-inline: $base * 3
+
+      > section
+        display: flex
+        flex-direction: row
+        box-sizing: content-box
+        height: $size
+        gap: $base
+        min-width: $base * 20
+
+        button
+          font: inherit
+
+        > .col
+          display: flex
+          flex-direction: column
+          justify-content: center
+
+          > *
+            display: flex
+            align-items: center
+            height: calc($size / 3)
+
+        > a
+          > img
+            aspect-ratio: 1
+            object-fit: contain
+            width: $size
+            height: $size
+            border: 1px solid #444
+            border-radius: $radius
+            box-sizing: border-box
+            background: url('data-url:./img/checkerboard.svg') repeat

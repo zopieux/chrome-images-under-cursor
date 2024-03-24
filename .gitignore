@@ -1,6 +1,9 @@
 build/
-src/img/icon-*.png
+dist/
+node_modules/
 .sass-cache/
+.parcel-cache/
+web-ext-artifacts/
 *.css
 *.css.map
 *.crx
