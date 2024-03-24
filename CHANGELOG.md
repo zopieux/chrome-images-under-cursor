@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0] 2023-03-24
+## [3.0.1] 2023-03-24
 
 - Complete rewrite!
 - Add support for shadow DOM nested elements.
