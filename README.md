@@ -9,9 +9,10 @@ This is useful to circumvent the HTML, Javascript and CSS tricks some websites
 use to prevent the user from accessing the page assets — which is plain
 ridiculous, as there are accessible anyway.
 
-## Install from Chrome Web Store
+## Install from Chrome Web Store or Firefox addons
 
-[![Install from Store](/.github/store-button.png?raw=true)](https://chrome.google.com/webstore/detail/images-under-cursor/kjfcpinmimcpiabejchhneahpajgklcj)
+[![Install on Chrome](/.github/store-button.png?raw=true)](https://chrome.google.com/webstore/detail/images-under-cursor/kjfcpinmimcpiabejchhneahpajgklcj)
+[![Install on Firefox](/.github/get-the-addon.png?raw=true)](https://addons.mozilla.org/firefox/addon/images-under-cursor/)
 
 ## Screenshots
 

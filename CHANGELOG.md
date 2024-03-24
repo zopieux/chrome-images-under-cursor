@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [3.0.1] 2023-03-24
 
 - Complete rewrite!
+- Now supports Firefox!
 - Add support for shadow DOM nested elements.
 - Only show images actually under the cursor.
 - Revamped the modal UI.
