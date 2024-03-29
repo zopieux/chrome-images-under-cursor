@@ -1,7 +1,7 @@
 {
   "name": "images-under-cursor",
   "type": "module",
-  "version": "1.0.0",
+  "version": "3.0.3",
   "private": true,
   "scripts": {
     "start": "parcel watch src/manifest.json --host localhost --config @parcel/config-webextension",

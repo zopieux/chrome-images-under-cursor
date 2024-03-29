@@ -32,6 +32,18 @@
   "unknown_size": {
     "message": "taille inconnue"
   },
+  "req_perm_title": {
+    "message": "Images Sous Curseur a besoin d'une permission"
+  },
+  "req_perm_text": {
+    "message": "Merci d'avoir installé Images Sous Curseur. Pour pouvoir utiliser cette extension sur n'importe quelle page, Firefox a besoin d'une permission. Cliquez sur le bouton ci-dessous puis sur « Autoriser » lorsque Firefox vous le demande."
+  },
+  "req_perm_denied": {
+    "message": "Vous avez refusé la permission. Images Sous Curseur ne fonctionne pas correctement sans cette permission. Vous pouvez réessayer en cliquant sur le bouton."
+  },
+  "req_perm_btn": {
+    "message": "Donner la permission"
+  },
   "type_image": {
     "message": "Image"
   },

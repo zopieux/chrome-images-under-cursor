@@ -2,7 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.0.1] 2023-03-24
+## [3.0.3] 2023-03-29
+
+- Fix "Escape" not closing the dialog.
+- Add Firefox permission prompt, otherwise the extension is useless.
+
+## [3.0.0] 2023-03-24
 
 - Complete rewrite!
 - Now supports Firefox!

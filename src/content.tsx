@@ -296,20 +296,25 @@ function findAndShow(pos: Point, shortcut?: string): Promise<void> {
       const shadowRoot = shadow.attachShadow({ mode: 'open' })
       function close() {
         try {
-          // shadow.remove()
+          document.removeEventListener('keydown', closeOnEscape)
           document.body.removeChild(shadow)
         }
         catch (e) { }
         resolve()
       }
+      function closeOnEscape(e: KeyboardEvent) {
+        if (e.key === 'Escape')
+          close()
+      }
       function ignore(e) {
         e.stopPropagation()
         e.preventDefault()
       }
+      document.addEventListener('keydown', closeOnEscape)
       render(
         <>
           <style>{contentCss}</style>
-          <main onClick={close} onKeyUp={e => e.key === 'Escape' && close()}>
+          <main onClick={close}>
             <div>
               <span className="logo" onClick={ignore} />
               <div className="scroll" onClick={ignore}>

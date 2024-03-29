@@ -32,6 +32,18 @@
   "unknown_size": {
     "message": "unknown size"
   },
+  "req_perm_title": {
+    "message": "Images Under Cursor requires permission"
+  },
+  "req_perm_text": {
+    "message": "Thanks for installing Images Under Cursor. To use this extension on any page, Firefox needs an extra permission. Please click the button below then click “Allow” when prompted by Firefox."
+  },
+  "req_perm_denied": {
+    "message": "You denied the request. Images Under Cursor doesn't work well without this permission. You can try again by clicking the button."
+  },
+  "req_perm_btn": {
+    "message": "Grant permission"
+  },
   "type_image": {
     "message": "Image"
   },
